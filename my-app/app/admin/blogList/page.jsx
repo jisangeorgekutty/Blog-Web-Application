@@ -8,7 +8,7 @@ function page() {
   const [blogs, setBlogs] = useState([]);
 
   const fetchBlogs = async () => {
-    const response = await axios.get('/api/blogs');
+    const response = await axios.get('/api/blog');
     setBlogs(response.data.blogs);
   }
 
@@ -17,13 +17,13 @@ function page() {
   })
 
   const deleteBlog = async (mongoId) => {
-    const response=await axios.delete('/api/blog',{
-      params:{
-        id:mongoId
+    const response = await axios.delete('/api/blog', {
+      params: {
+        id: mongoId
       }
     })
 
-    if(response){
+    if (response) {
       toast.success(response.data.message);
       fetchBlogs();
     }
@@ -46,7 +46,7 @@ function page() {
           </thead>
           <tbody>
             {blogs.map((item, index) => {
-              return <BlogTableItem key={index} mongoId={item._id} title={item.title} author={item.author} authorImg={item.authorImg} date={item.date} deleteBlog={deleteBlog}/>
+              return <BlogTableItem key={index} mongoId={item._id} title={item.title} author={item.author} authorImg={item.authorImg} date={item.date} deleteBlog={deleteBlog} />
             })}
           </tbody>
         </table>
