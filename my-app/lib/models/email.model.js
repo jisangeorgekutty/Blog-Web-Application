@@ -1,14 +1,16 @@
 import mongoose from "mongoose";
 
-const emailSchema = new mongoose.Schema({  
-    email:{
-        type:String,
-        required:true
+const emailSchema = new mongoose.Schema({
+    email: {
+        type: String,
+        required: true
     },
-    Date    :{
-        type:Date,
-        default:Date.now()
+    Date: {
+        type: Date,
+        default: Date.now()
     }
 })
 
-const EmailModel=mongoose.models.email || mongoose.model('email',emailSchema);
+const EmailModel = mongoose.models.email || mongoose.model('email', emailSchema);
+
+export default EmailModel;
