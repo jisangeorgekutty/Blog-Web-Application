@@ -9,7 +9,7 @@ function Header() {
         <Image src={assets.logo} className='w-[130px] sm:w-auto' alt='logo' width={180} />
         <button className='flex items-center gap-2 font-medium py-1 px-3 border border-solid border-black shadow-[-7px_7px_0px_#000000]'>
           <span>Get Started</span>
-          <span><Image src={assets.arrow} alt="arrow" /></span>
+          <Image src={assets.arrow} alt="arrow" />
         </button>
       </div>
       <div className='text-center my-8'>

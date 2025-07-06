@@ -1,23 +1,23 @@
 "use client"
 import { assets, blog_data } from '@/assets/assets';
 import Footer from '@/components/Footer';
+import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
-function page() {
+function page({}) {
   const { id } = useParams();
   const [data, setData] = useState(null);
 
-  const fetchBlogData = () => {
-    for (let i = 0; i < blog_data.length; i++) {
-      if (Number(id) === blog_data[i].id) {
-        setData(blog_data[i]);
-        console.log(blog_data[i])
-        break;
+  const fetchBlogData = async () => {
+    const response = await axios.get(`/api/blog`, {
+      params: {
+        id:id
       }
-    }
+    })
+    setData(response.data);
   }
 
   useEffect(() => {
@@ -34,7 +34,7 @@ function page() {
       </div>
       <div className='text-center my-24'>
         <h1 className='text-2xl sm:text-5xl font-semibold max-w-[700px] mx-auto'>{data.title}</h1>
-        <Image src={data.author_img} width={60} height={60} alt='' className='mx-auto mt-6 border border-white rounded-full' />
+        <Image src={data.authorImg} width={60} height={60} alt='' className='mx-auto mt-6 border border-white rounded-full' />
         <p className='mt-1 pb-2 text-lg max-w-[740px] mx-auto'>{data.author}</p>
       </div>
     </div>
@@ -56,13 +56,13 @@ function page() {
       <div className='my-24'>
         <p className='text-black font font-semibold my-4'>Share this article on social media</p>
         <div className='flex'>
-          <Image src={assets.facebook_icon} width={50} alt=''/>
-          <Image src={assets.twitter_icon} width={50} alt=''/>
-          <Image src={assets.googleplus_icon} width={50} alt=''/>
+          <Image src={assets.facebook_icon} width={50} alt='' />
+          <Image src={assets.twitter_icon} width={50} alt='' />
+          <Image src={assets.googleplus_icon} width={50} alt='' />
         </div>
       </div>
     </div>
-    <Footer/>
+    <Footer />
   </> : <></>
   )
 }
