@@ -7,14 +7,14 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
-function page({}) {
+function page({ }) {
   const { id } = useParams();
   const [data, setData] = useState(null);
 
   const fetchBlogData = async () => {
     const response = await axios.get(`/api/blog`, {
       params: {
-        id:id
+        id: id
       }
     })
     setData(response.data);
@@ -40,19 +40,7 @@ function page({}) {
     </div>
     <div className='mx-5 max-w-[800px] md:mx-auto mt-[-100px] mb-10'>
       <Image className='border-4 border-white' src={data.image} width={1280} height={720} alt='' />
-      <h1 className='my-8 text-[26px] font-semibold'>Introduction:</h1>
-      <p className=''>{data.description}</p>
-      <h3 className='my-5 text-[18px] font-semibold'>Step 1: Self-Reflection and Goal Setting</h3>
-      <p className='my-3'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      <p className='my-3'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      <h3 className='my-5 text-[18px] font-semibold'>Step 2: Self-Reflection and Goal Setting</h3>
-      <p className='my-3'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      <p className='my-3'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      <h3 className='my-5 text-[18px] font-semibold'>Step 3: Self-Reflection and Goal Setting</h3>
-      <p className='my-3'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      <p className='my-3'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      <h3 className='my-5 text-[18px] font-semibold'>Conclusion:</h3>
-      <p className='my-3'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <div className='blog-content' dangerouslySetInnerHTML={{__html:data.description}}></div>
       <div className='my-24'>
         <p className='text-black font font-semibold my-4'>Share this article on social media</p>
         <div className='flex'>
