@@ -2,6 +2,7 @@
 import SubcriptionTableItem from '@/components/AdminComponents/SubcriptionTableItem'
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast';
 
 function page() {
   const [emails, setEmails] = useState([]);
@@ -9,6 +10,20 @@ function page() {
   const fetchEmails = async () => {
     const response = await axios.get('/api/email');
     setEmails(response.data.emails);
+  }
+
+  const deleteEmails=async(mongoId)=>{
+    const response=await axios.delete('/api/email',{
+      params:{
+        id:mongoId
+      }
+    })
+    if(response.data.success){
+      toast.success(response.data.message);
+      fetchEmails();
+    }else{
+      toast.error("Error in email deletion");
+    }
   }
 
   useEffect(() => {
@@ -29,7 +44,7 @@ function page() {
           </thead>
           <tbody>
             {emails.map((item, index) => {
-              <SubcriptionTableItem key={index} email={item.email} date={item.Date}/>
+              <SubcriptionTableItem key={index} email={item.email} mongoId={item._id} date={item.Date} deleteEmails={deleteEmails}/>
             })}
           </tbody>
         </table>
